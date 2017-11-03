@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>为师把全身功力传授给你出去就说两年经验</title>
+    <meta name="renderer" content="webkit">
+    <script type="text/javascript" src="javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/jqueryui.js"></script>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/pagination.css">
+    <script type="text/javascript" src="javascripts/jquery.pagination.js"></script>
+    <link href="images/favicon.ico" rel="icon" type="image/x-icon" />
+    <style>
+        table thead, tbody tr {
+            display:table;
+            width:100%;
+            table-layout:fixed;
+        }
+
+        table thead {
+            width: calc( 100% - 17px)
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid clearfix">
+        <div class="col-md-12 column" style="height: 20px">
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-md-11 col-lg-11 col-sm-11">
+            <div class="row-fluid">
+                <div class="col-md-6 col-lg-6">
+                    <h3><%= titleList %><small>天津WEB前端开发交流群 274085293 源码已上传群共享 </small></h3>
+                    <input type="text" class="searchIpt" style="width:200px;height:20px;text-align: center;" placeholder="全局关键字检索" />
+                    <span>共<%= doclen %>条数据</span>
+                    <a href="/traininglistPage">分页模式</a>
+                    <!--<input type="text" class="btntestipt" />-->
+                    <!--测试用按钮-->
+                    <!--<input type="button" class="btn btn-success btntest" value="test" />-->
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <div style="height: 72px"></div>
+                    <a class="btn btn-primary"  href="/trainingadd" style="float: right;margin-top: 15px" >证明自己</a>
+                    <h4 style="float: right">教练,我想加一条:&nbsp;</h4>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="col-md-12 col-lg-12">
+                    <table class="table  table-bordered">
+                        <thead>
+                        <tr>
+                            <th style="text-align: center">
+                                地区
+                            </th>
+                            <th style="text-align: center">
+                                机构名称
+                            </th>
+                            <th style="text-align: center">
+                                地址
+                            </th>
+                            <th style="text-align: center">
+                                旗下kengmeng子公司
+                            </th>
+                            <th style="text-align: center">
+                                一些描述
+                            </th>
+                            <th style="text-align: center">
+                               操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbody">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--<div class="col-md-1 col-lg-1 col-sm-1">-->
+        <!--</div>-->
+    </div>
+</div>
+<script>
+    $(function () {
+        if($(".alert")){
+            setTimeout(function () {$(".alert").hide();}, 1500)
+        }
+        var val=$(window).height()-220;
+        var ht=val+'px';
+        $("tbody").css("display","block");
+        $("tbody").css("height",ht);
+        $("tbody").css("overflow-y","scroll");
+        $(window).resize(function () {
+            let val2=$(window).height()-220;
+            let ht2=val2+'px';
+            $("tbody").css("height",ht2);
+        });
+
+        //jq要用1.10
+        $(".searchIpt").keyup(function () {
+            $(".tbody tr").hide().filter(":contains('"+( $(this).val() )+"')").show();
+        }).keyup();
+
+
+        $.ajax({
+            url:'/traininglist',
+            type:'post',
+            success:function (data,status) {
+                if(status=='success'){
+
+                    //共多少条数据
+                    var len=eval('<%= doclen %>');
+                    for (let i=0;i<len;i++){
+                        var tr=$("<tr ><td style='text-align: center'>"+data[i].place+
+                            "</td><td style='text-align: center'>"+data[i].name+
+                            "</td><td style='text-align: center'>"+data[i].address+
+                            "</td><td style='text-align: center'>"+data[i].son+
+                            "</td><td style='text-align: center'>"+data[i].other+
+                            "</td><td ><a type='button'" +
+                            "class='btn btn-success btn-small' href='/trainingadd?id="+data[i]._id+"' id='"+data[i]._id+ " '>修改</a></td></tr>");
+                        $(".tbody").append(tr);
+                        changeColor(len);
+                    };
+                }
+            }
+        })
+//        $.ajax({
+//            url:'/traininglist',
+//            type:'post',
+//            success:function (data,status) {
+//                if(status=='success'){
+//                    //共多少条数据
+//                    var len=eval('<%= doclen %>');
+////                    for (let i=0;i<len;i++){
+////                        var tr=$("<tr><td><xmp>"+data[i].place+
+////                            "</xmp></td><td><xmp>"+data[i].name+
+////                            "</xmp></td><td><xmp>"+data[i].address+
+////                            "</xmp></td><td><xmp>"+data[i].son+
+////                            "</xmp></td><td><xmp>"+data[i].other+
+////                            "</xmp></td></tr>");
+////                        $(".tbody").append(tr);
+////                        changeColor(len);
+////                    };
+//                    for (let i=0;i<len;i++){
+//                        var tr=$("<tr><td>"+data[i].place+
+//                            "</td><td>"+data[i].name+
+//                            "</td><td>"+data[i].address+
+//                            "</td><td>"+data[i].son+
+//                            "</td><td>"+data[i].other+
+//                            "</td></tr>");
+//                        $(".tbody").append(tr);
+//                        changeColor(len);
+//                    };
+//                }
+//            }
+//        })
+
+        // change table color;
+        function changeColor(dataLength) {
+            $("tr:eq(0)").addClass('info');
+            for(let i=1;i<=dataLength;i++){
+                if(i%2==0){
+                    $("tr:eq("+i+")").addClass('success');
+                }
+            }
+        };
+
+
+        //测试 按钮单独的路由控制 删除 _id  59e842ad5d8e32075036ee95
+//        $(".btntest").click(function () {
+//            var id='59e842ad5d8e32075036ee95';
+//            var  updata2={"id":id};
+//            $.ajax({
+//                url:'/traininglist2',
+//                type:'post',
+//                data:updata2,
+//                success:function (data,status) {
+//                    if(status=='success'){
+//                        console.log(data);
+//                    }
+//                }
+//            })
+//        });
+    })
+</script>
+</body>
+</html>

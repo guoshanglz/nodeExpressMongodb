@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>login</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/registerAndLoginCSSJS/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/registerAndLoginCSSJS/assets/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/registerAndLoginCSSJS/assets/css/form-elements2.css">
+    <link rel="stylesheet" href="/registerAndLoginCSSJS/assets/css/style1.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="/registerAndLoginCSSJS/assets/ico/favicon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/registerAndLoginCSSJS/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/registerAndLoginCSSJS/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/registerAndLoginCSSJS/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/registerAndLoginCSSJS/assets/ico/apple-touch-icon-57-precomposed.png">
+    <link href="images/favicon.ico" rel="icon" type="image/x-icon" />
+</head>
+<body>
+<!-- Top content -->
+<div class="top-content">
+    <%- message %>
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h1><strong>登录</strong></h1>
+                    <div class="description">
+                        <p>
+                            After you longin,you can study the Essence Javascript_PDF<strong> which author shared.</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 form-box">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                           <p>haohaokanba,kanhuiledoushinide!</p>
+                        </div>
+                        <div class="form-top-right">
+                            <i class="fa fa-lock"></i>
+                        </div>
+                    </div>
+                    <div class="form-bottom">
+                        <form role="form" class="login-form">
+                            <div class="form-group">
+                                <label class="sr-only" for="nameipt">Username</label>
+                                <input type="text" name="nameipt" placeholder="Username..." class="nameipt form-control" id="nameipt">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="pwdipt">Password</label>
+                                <input type="password" name="pwdipt" placeholder="Password..." class="pwdipt form-control" id="pwdipt">
+                            </div>
+                            <button type="button" class="btn btn-success btnClick">Login!</button>
+                            <a type="button" href="/register" class="btn btn-warning" style="margin-top: 5px">去注册!</a>
+                            <a type="button" href="#" class="btn btn-info" style="margin-top: 5px">修改不了密码!</a>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Javascript -->
+<script src="/registerAndLoginCSSJS/assets/js/jquery-1.11.1.min.js"></script>
+<script src="/registerAndLoginCSSJS/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/registerAndLoginCSSJS/assets/js/jquery.backstretch.min.js"></script>
+<script src="/registerAndLoginCSSJS/assets/js/scripts2.js"></script>
+
+<!--[if lt IE 10]>
+<script src="/registerAndLoginCSSJS/assets/js/placeholder.js"></script>
+<![endif]-->
+<script>
+    $(function () {
+        if($(".alert")){
+            setTimeout(function () {$(".alert").hide();}, 1000)
+        }
+
+
+        $(".btnClick").click(function () {
+            var nameipt=$('.nameipt').val(),
+                pwdipt=$('.pwdipt').val();
+
+            var updata={"nameipt":nameipt,"pwdipt":pwdipt};
+            if(nameipt!==""&& nameipt!==null && pwdipt!==""&&pwdipt!==null ){
+                $.ajax({
+                    url:'/login',
+                    type:'post',
+                    data:updata,
+                    success:function (data,status) {
+                        if(status == 'success'){
+                            console.log(data);
+                            location.href = 'traininglistPage';
+                        }
+                    },
+                    error: function(data,err){
+                        location.href = 'login';
+                    }
+                })
+
+            }else {
+                alert('不能有空项');
+            }
+        })
+    })
+</script>
+</body>
+</html>

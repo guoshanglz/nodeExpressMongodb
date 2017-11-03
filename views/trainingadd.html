@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>为师把全身功力传授给你出去就说两年经验</title>
+    <meta name="renderer" content="webkit">
+    <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/pagination.css">
+    <script type="text/javascript" src="/javascripts/jquery.pagination.js"></script>
+    <link rel="stylesheet" href="/select/css/bootstrap-select.css">
+    <script type="text/javascript" src="/select/js/bootstrap-select.js"></script>
+    <script type="text/javascript" src="javascripts/gt.js"></script>
+    <script type="text/javascript" src="javascripts/trainingadd_js.js"></script>
+    <link href="images/favicon.ico" rel="icon" type="image/x-icon" />
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid clearfix">
+        <div class="col-md-12 column" style="height: 50px">
+
+        </div>
+    </div>
+    <div class="row-fluid clearfix">
+        <div class="col-md-3 col-lg-3 col-sm-3">
+
+        </div>
+        <div class="col-md-6 col-lg-6 col-sm-6">
+
+            <form class="form-horizontal">
+                <fieldset>
+                    <legend><h2><%= titleAdd %>&nbsp;&nbsp;<small><a href="/traininglistPage">返回列表页</a></small></h2></legend>
+                    <div class="imgdiv"></div>
+                    <div class="control-group">
+                        <label class="control-label" for="place">地区：</label>
+                        <div class="controls" >
+                            <select id="place" class="selectpicker place"  data-live-search="true" name="select" title="请选择地区"  >　　　　　　　　　　　　　　　　　　　
+                                <option>和平区</option>
+                                <option>南开区</option>
+                                <option >河西区</option>
+                                <option>河东区</option>
+                                <option>河北区</option>
+                                <option>红桥区</option>
+                                <option>东丽区</option>
+                                <option>西青区</option>
+                                <option>津南区</option>
+                                <option>北辰区</option>
+                                <option>武清区</option>
+                                <option>宝坻区</option>
+                                <option>滨海新区</option>
+                                <option>静海县</option>
+                                <option>宁河县</option>
+                                <option>蓟县</option>
+                                <!--<option selected>全部</option>-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="name">机构名称：</label>
+                        <div class="controls">
+                            <input  id="name" style=" text-align: center;width: 100%" class="name" type="text"  placeholder="不可为空"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="address">地址：</label>
+                        <div class="controls">
+                            <input id="address" style=" text-align: center;width: 100%" class="address " type="text" placeholder="不可为空 不知道就写null" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="son">旗下kengmeng子公司：</label>
+                        <div class="controls">
+                            <input id="son" style=" text-align: center;width: 100%" class="son " type="text" placeholder="不可为空 不知道就写null" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="other">一些描述：</label>
+                        <div class="controls">
+                            <textarea style="width: 100%" rows="10" cols="30"  id="other" class="other " placeholder="没什么说的就署个名" ></textarea>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="other">完成验证：</label>
+                        <div class="controls">
+                            <div id="captcha">
+                                <p id="wait" class="show">正在加载验证码......</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                             <!--<button type="button" class="btn btn-block btn-warning upload">提交</button>-->
+                            <!--<div>-->
+                                <!--<label>完成验证：</label>-->
+                                <!--<div id="captcha">-->
+                                    <!--<p id="wait" class="show">正在加载验证码......</p>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <input type="button" class="btn btn-block btn-warning upload" value="提交" />
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="col-md-3 col-lg-3 col-sm-3">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

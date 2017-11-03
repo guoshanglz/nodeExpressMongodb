@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/pagination.css">
+    <script type="text/javascript" src="javascripts/jquery.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="javascripts/jquery.pagination.js"></script>
+    <style>
+        table thead, tbody tr {
+            display:table;
+            width:100%;
+            table-layout:fixed;
+        }
+
+        table thead {
+            width: calc( 100% - 17px)
+        }
+    </style>
+    <script>
+        $(function () {
+            var val=$(window).height()-275;
+            var ht=val+'px';
+            $("tbody").css("display","block");
+            $("tbody").css("height",ht);
+            $("tbody").css("overflow-y","scroll");
+
+            $(window).resize(function () {
+                console.log($(window).height());
+                let val2=$(window).height()-275;
+                let ht2=val2+'px';
+                $("tbody").css("height",ht2);
+            });
+        })
+    </script>
+</head>
+<body>
+<h1><%= title %></h1>
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-md-6">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        id
+                    </th>
+                    <th>
+                        name
+                    </th>
+                    <th>
+                        pwd
+                    </th>
+                    <th>
+                        car
+                    </th>
+
+                </tr>
+                </thead>
+                <tbody class="tbody">
+
+                </tbody>
+            </table>
+            <div style="float: right;" class="M-box4"></div>
+        </div>
+        <div class="col-md-6">
+            <label>usm:</label>
+            <input type="text" class="username"  /><br><br>
+            <label>pwd:</label>
+            <input type="text" class="pwd"  /><br><br>
+            <label>car&nbsp;&nbsp;:</label>
+            <input type="text" class="car"  /><br><br>
+            <input type="button" class="btn btn-danger" value="upload" />
+        </div>
+    </div>
+</div>
+<div class="div"></div>
+<script>
+    $(function () {
+        $(".btn").click(function () {
+            var username=$(".username").val(),
+                pwd=$(".pwd").val(),
+                car=$(".car").val(),
+                currentPage=1;
+
+            var updata={"username":username,"pwd":pwd,"car":car,"currentPage":1};
+            if(!(username===""||username===null) && !(pwd===""||pwd===null) && !(car===""||car===null)){
+                $.ajax({
+                    url:'/users',
+                    type:'post',
+                    data:updata,
+                    success:function (data) {
+                        $(".tbody").empty();
+                        console.log(data);
+                        var len=data.length;
+                        for(var i=0;i<len;i++){
+                            var tr='<tr><td>'+data[i].name+
+                                '</td><td>'+ data[i].name+
+                                '</td><td>'+data[i].pwd+
+                                '</td><td>'+data[i].car+
+                                '</td></tr>';
+                            $(".tbody").append(tr);
+                        }
+                    },
+                    error:function (error) {
+                        console.log(error)
+                    }
+                })
+            }else {
+                alert('input不能有空')
+            }
+        })
+    })
+</script>
+</body>
+</html>
